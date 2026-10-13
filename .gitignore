@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/AGENTS.md
+backend/test_leadflow.db
+backend/build/
+backend/dist/
+backend/*.egg-info/
+coverage/
+work/
