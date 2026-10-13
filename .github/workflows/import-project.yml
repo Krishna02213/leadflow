@@ -1,8 +1,7 @@
 name: Import LeadFlow source
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,34 +14,7 @@ jobs:
       - name: Download validated project source
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download '${{ github.event.release.tag_name }}' --pattern leadflow-source.zip
-      - name: Unpack validated project source
-        run: |
-          unzip -o leadflow-source.zip
-          rm leadflow-source.zip
-          rm .github/workflows/import-project.yml
-      - name: Commit application tree
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m 'feat: import complete LeadFlow application'
-          git push
-name: Import LeadFlow source
-
-on:
-  push:
-    paths:
-      - leadflow-source.zip
-
-permissions:
-  contents: write
-
-jobs:
-  import-source:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+        run: gh release download v1.0.0 --pattern leadflow-source.zip
       - name: Unpack validated project source
         run: |
           unzip -o leadflow-source.zip
