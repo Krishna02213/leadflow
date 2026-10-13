@@ -17,9 +17,8 @@ jobs:
         run: gh release download v1.0.0 --pattern leadflow-source.zip
       - name: Unpack validated project source
         run: |
-          unzip -o leadflow-source.zip
+          unzip -o leadflow-source.zip -x '.github/workflows/ci.yml'
           rm leadflow-source.zip
-          rm .github/workflows/import-project.yml
       - name: Commit application tree
         run: |
           git config user.name 'github-actions[bot]'
