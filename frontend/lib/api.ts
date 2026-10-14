@@ -1,6 +1,8 @@
 import type { Discussion, Lead, LeadStatus, User } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === "production" ? "" : "http://localhost:8000");
 
 export class ApiError extends Error {
   constructor(message: string, public status: number) {
@@ -49,4 +51,3 @@ export const api = {
       body: JSON.stringify(data),
     }),
 };
-
