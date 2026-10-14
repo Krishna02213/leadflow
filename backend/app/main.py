@@ -6,7 +6,7 @@ from sqlalchemy import or_, select
 from sqlalchemy.orm import Session, selectinload
 
 from .config import settings
-from .database import get_db
+from .database import Base, engine, get_db
 from .models import Discussion, Lead, User
 from .schemas import (
     DiscussionCreate,
@@ -20,10 +20,13 @@ from .schemas import (
     UserResponse,
 )
 from .security import create_access_token, get_current_user, verify_password
+from .seed import seed
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    seed()
     yield
 
 
